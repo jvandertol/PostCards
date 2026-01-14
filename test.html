@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    .postcard{
+  width:6.25in;
+  height:9.25in;
+  position:relative;
+  overflow:hidden;
+}
+
+/* all layers share the SAME coordinate system (the postcard) */
+.layer{
+  position:absolute;
+  inset:0;
+}
+
+/* tune these 3 numbers only */
+:root{
+  --edge: 52%;   /* where the V “shoulders” are */
+  --apex: 58%;   /* where the V point is */
+  --gap:  4%;    /* white thickness */
+}
+.black{
+  background:#111;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--edge),
+    50%  calc(var(--edge) - (var(--apex) - var(--edge))),
+    0    var(--edge)
+  );
+}
+
+.black{
+  background:#111;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--edge),
+    50%  var(--apex),
+    0    var(--edge)
+  );
+}
+
+.red{
+  background:#c62828;
+  clip-path: polygon(
+    0    calc(var(--edge) + var(--gap)),
+    50%  calc(var(--apex) + var(--gap)),
+    100% calc(var(--edge) + var(--gap)),
+    100% 100%,
+    0 100%
+  );
+}
+
+</style>
+</head>
+<body>
+
+<div class="postcard">
+  <div class="layer black"></div>
+  <div class="layer gap"></div>
+  <div class="layer red"></div>
+</div>
+
+
+</body>
+</html>
