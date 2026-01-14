@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Postcard Back – Print Safe</title>
+
+<style>
+  /* =========================
+     CONFIGURATION
+     ========================= */
+  :root {
+    --trim-w: 6.25in;
+    --trim-h: 4.25in;
+    --bleed: 0.125in;
+    --safe: 0.25in;
+
+    --blue: #333366;
+    --orange: #FFAA44;
+  }
+
+  /* =========================
+     GLOBAL / PREVIEW
+     ========================= */
+  body {
+    margin: 0;
+    background: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+
+  /* =========================
+     SCREEN PREVIEW (FIT TO TRIM)
+     ========================= */
+  .preview-scale {
+    transform-origin: center;
+  }
+
+  @media screen {
+    .preview-scale {
+      transform: scale(
+        calc(
+          min(
+            (100vw - 40px) / var(--trim-w),
+            (100vh - 40px) / var(--trim-h)
+          )
+        )
+      );
+    }
+  }
+
+  /* =========================
+     PRINT LOCKDOWN (BLEED SIZE)
+     ========================= */
+  @media print {
+    @page {
+      size: calc(var(--trim-w) + 2 * var(--bleed))
+            calc(var(--trim-h) + 2 * var(--bleed));
+      margin: 0;
+    }
+
+    body {
+      background: none;
+    }
+
+    .preview-scale {
+      transform: none !important;
+    }
+
+    .guides {
+      display: none !important;
+    }
+  }
+
+  /* =========================
+     BLEED / TRIM
+     ========================= */
+  .bleed-page {
+    width: calc(var(--trim-w) + 2 * var(--bleed));
+    height: calc(var(--trim-h) + 2 * var(--bleed));
+    position: relative;
+    background: white;
+  }
+
+  .trim {
+    position: absolute;
+    top: var(--bleed);
+    left: var(--bleed);
+    width: var(--trim-w);
+    height: var(--trim-h);
+    background: var(--blue);
+    overflow: hidden;
+  }
+
+  /* =========================
+     TOGGLEABLE GUIDES
+     ========================= */
+  .guides {
+    display: none;
+    pointer-events: none;
+  }
+
+  body.show-guides .guides {
+    display: block;
+  }
+
+  .guide-bleed {
+    position: absolute;
+    inset: calc(-1 * var(--bleed));
+    border: 2px dashed rgba(0,128,0,0.5);
+    z-index: 3;
+  }
+
+  .guide-trim {
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(255,0,0,0.5);
+    z-index: 4;
+  }
+
+  .guide-safe {
+    position: absolute;
+    top: var(--safe);
+    left: var(--safe);
+    width: calc(var(--trim-w) - 2 * var(--safe));
+    height: calc(var(--trim-h) - 2 * var(--safe));
+    border: 2px dashed rgba(0,0,255,0.5);
+    z-index: 5;
+  }
+
+  /* =========================
+     YOUR ORIGINAL BACK DESIGN
+     ========================= */
+
+  /* TOP BRANDING */
+  .top-branding {
+    position: absolute;
+    top: var(--safe);
+    left: var(--safe);
+    right: calc(var(--safe) + 1.25in);
+    font-size: 0.20in;
+    font-weight: bold;
+    color: var(--orange);
+    text-shadow: 0 0 6px rgba(0,0,0,0.4);
+  }
+
+
+  /* LEFT CONTENT */
+  .left-content {
+    position: absolute;
+    top: calc(var(--safe) + 0.40in);
+    left: var(--safe);
+    width: 1.4in;
+    color: white;
+    text-shadow: 0 0 6px rgba(0,0,0,0.4);
+  }
+
+  .qr-placeholder {
+    width: 1.0in;
+    height: 1.0in;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    margin-bottom: 0.12in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.3);
+    box-sizing: border-box;
+  }
+
+  .cta {
+    font-size: 0.13in;
+    font-weight: bold;
+    line-height: 1.25;
+    margin-bottom: 0.15in;
+  }
+
+  ul {
+    font-size: 0.12in;
+    margin: 0;
+    padding-left: 0.18in;
+    line-height: 1.25;
+  }
+
+  /* ADDRESS BLOCK (UNCHANGED) */
+  .address-block {
+    position: absolute;
+
+    left: calc(var(--trim-w) - var(--safe) - 4in);
+    right: 0;                 /* reach trim */
+    bottom: 0;
+
+    width: auto;              /* ← THIS is the key change */
+    height: 2.7in;
+
+    background: white;
+    box-sizing: border-box;
+  }
+
+
+  .barcode-clear {
+    position: absolute;
+    right: var(--safe);
+    bottom: var(--safe);
+    width: 4in;
+    height: 0.625in;
+    background: transparent;
+  }
+</style>
+</head>
+
+<body class="show-guides">
+
+<div class="preview-scale">
+  <div class="bleed-page">
+
+    <div class="guide-bleed guides"></div>
+
+    <div class="trim">
+      <div class="guide-trim guides"></div>
+      <div class="guide-safe guides"></div>
+
+      <!-- TOP BRAND -->
+      <div class="top-branding">
+        Smog Advantage — SmogAdvantage.com
+      </div>
+
+      <!-- LEFT CONTENT -->
+      <div class="left-content">
+        <div class="qr-placeholder">
+          <img src="https://demandadvantage.com/postcards/2026-qrcode.png"
+               style="width:100%;height:100%;object-fit:contain;">
+        </div>
+
+        <div class="cta">
+          Scan to learn why you should be our customer<br>
+          <span style="color:red;">Get Your Special Offer</span>
+        </div>
+
+        <ul>
+          <li>Hundreds of Happy Customers</li>
+          <li>Millions of Work Orders</li>
+          <li>Since 2011</li>
+        </ul>
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="address-block"></div>
+      <div class="barcode-clear"></div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

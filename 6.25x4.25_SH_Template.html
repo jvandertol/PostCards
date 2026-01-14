@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Postcard Front – HTML Conversion (Placeholders)</title>
+
+<style>
+:root {
+  --trim-w: 6.25in;
+  --trim-h: 4.25in;
+  --bleed: 0.125in;
+  --offer-width: 1.44in;
+  --offer-height: 1.55in;
+}
+
+/* PREVIEW */
+body {
+  margin: 0;
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.preview-scale { transform-origin: center; }
+
+@media screen {
+  .preview-scale {
+    transform: scale(
+      min(
+        (100vw - 40px) / var(--trim-w),
+        (100vh - 40px) / var(--trim-h)
+      )
+    );
+  }
+}
+
+@media print {
+  @page {
+    size: calc(var(--trim-w) + 2 * var(--bleed))
+          calc(var(--trim-h) + 2 * var(--bleed));
+    margin: 0;
+  }
+  body { background: none; }
+  .preview-scale { transform: none !important; }
+}
+
+/* BLEED / TRIM */
+.bleed-page {
+  width: calc(var(--trim-w) + 2 * var(--bleed));
+  height: calc(var(--trim-h) + 2 * var(--bleed));
+  position: relative;
+  background: white;
+}
+
+.trim {
+  position: absolute;
+  top: var(--bleed);
+  left: var(--bleed);
+  width: var(--trim-w);
+  height: var(--trim-h);
+  overflow: hidden;
+}
+
+/* BACKGROUND + STACKING CONTEXT */
+.front-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #34cfe2 0%,
+    #7fe4ee 40%,
+    #c9f1f6 70%,
+    #eefbfc 100%
+  );
+}
+
+/* 🔑 THIS WAS MISSING */
+.front-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* PLACEHOLDERS */
+.placeholder {
+  background: rgba(255,255,255,0.35);
+  border: 2px dashed rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.12in;
+}
+
+.placeholder.circle { border-radius: 50%; }
+
+/* LOGOS */
+.logo-strip {
+  position: absolute;
+  top: 0.20in;
+  left: 0.30in;
+  right: 0.30in;
+  height: 0.55in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-strip .placeholder {
+  width: 0.60in;
+  height: 0.45in;
+}
+
+/* HEADLINE */
+.headline {
+  position: absolute;
+  top: 0.90in;
+  left: 0.30in;
+  right: 0.30in;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.22in;
+  font-weight: bold;
+}
+
+/* OFFER BOX */
+.offer-box {
+  border: 2px dashed rgba(0,0,0,0.6);
+  border-radius: 0.15in;
+  padding: 0.15in;
+  background: rgba(255,255,255,0.15);
+}
+
+/* LEFT OFFER */
+.left-offer {
+  position: absolute;
+  top: 1.10in;
+  left: 0.15in;        /* half the original inset */
+  width: 1.48in;       /* 20% narrower */
+  text-align: center;
+}
+
+.left-offer .offer {
+  font-size: 0.42in;
+  font-weight: bold;
+}
+
+/* RIGHT OFFER */
+.right-column {
+  position: absolute;
+  top: 1.10in;
+  right: 0.15in;       /* half the original inset */
+  width: 1.44in;       /* 20% narrower */
+  text-align: center;
+}
+
+/* MAP + REVIEWS */
+.map-placeholder {
+  position: absolute;
+  bottom: 0.45in;
+  left: 2.10in;
+  width: 2.10in;
+  height: 1.10in;
+}
+
+.reviews {
+  position: absolute;
+  bottom: 0.20in;
+  right: 0.30in;
+  width: 1.30in;
+  height: 0.45in;
+}
+
+/* BOTTOM BAND (BACKGROUND ONLY) */
+.bottom-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0.30in;
+  background: #178fa8;
+  z-index: 1;
+  pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="preview-scale">
+  <div class="bleed-page">
+    <div class="trim">
+      <div class="front-bg">
+
+        <div class="logo-strip">
+          <div class="placeholder circle">Logo</div>
+          <div class="placeholder">Logo</div>
+          <div class="placeholder">Logo</div>
+          <div class="placeholder circle">Logo</div>
+          <div class="placeholder circle">Logo</div>
+        </div>
+
+        <div class="headline">
+          <span>Fast Service!</span>
+          <span>Walk-ins Welcome</span>
+        </div>
+
+        <div class="left-offer offer-box">
+          <div>Smog Check</div>
+          <div class="offer">$20 off</div>
+          <div>Smog Check</div>
+        </div>
+
+        <div class="right-column offer-box">
+          <h3>Registration &amp; Tags</h3>
+          <p>Get your TAGS here!</p>
+          <p>Skip the DMV Lines</p>
+        </div>
+
+        <div class="placeholder map-placeholder">Map</div>
+        <div class="placeholder reviews">Yelp</div>
+
+        <div class="bottom-band"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

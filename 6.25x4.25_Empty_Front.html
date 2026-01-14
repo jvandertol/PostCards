@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Postcard Front – Empty Template</title>
+
+<style>
+:root {
+  --trim-w: 6.25in;
+  --trim-h: 4.25in;
+  --bleed: 0.125in;
+}
+
+body {
+  margin: 0;
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.preview-scale {
+  transform-origin: center;
+}
+
+@media screen {
+  .preview-scale {
+    transform: scale(
+      calc(
+        min(
+          (100vw - 40px) / var(--trim-w),
+          (100vh - 40px) / var(--trim-h)
+        )
+      )
+    );
+  }
+}
+
+@media print {
+  @page {
+    size: calc(var(--trim-w) + 2 * var(--bleed))
+          calc(var(--trim-h) + 2 * var(--bleed));
+    margin: 0;
+  }
+
+  body { background: none; }
+  .preview-scale { transform: none !important; }
+  .guides { display: none !important; }
+}
+
+/* BLEED / TRIM */
+.bleed-page {
+  width: calc(var(--trim-w) + 2 * var(--bleed));
+  height: calc(var(--trim-h) + 2 * var(--bleed));
+  position: relative;
+  background: white;
+}
+
+.trim {
+  position: absolute;
+  top: var(--bleed);
+  left: var(--bleed);
+  width: var(--trim-w);
+  height: var(--trim-h);
+  overflow: hidden;
+}
+
+/* GUIDES (OPTIONAL) */
+.guides { display: none; pointer-events: none; }
+body.show-guides .guides { display: block; }
+
+.guide-trim {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(255,0,0,0.5);
+}
+
+.guide-bleed {
+  position: absolute;
+  inset: calc(-1 * var(--bleed));
+  border: 2px dashed rgba(0,128,0,0.5);
+}
+</style>
+</head>
+
+<body class="show-guides">
+<!-- Guides are screen-only and will NOT print -->
+
+
+<div class="preview-scale">
+  <div class="bleed-page">
+
+    <div class="guide-bleed guides"></div>
+
+    <div class="trim">
+      <div class="guide-trim guides"></div>
+      <!-- EMPTY FRONT -->
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
