@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Postcard Front – Empty Template</title>
+
+<style>
+:root {
+  --trim-w: 6.25in;
+  --trim-h: 4.25in;
+  --bleed: 0.125in;
+    --red: #b1121b;
+  --black: #111;
+}
+
+body {
+  margin: 0;
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.preview-scale {
+  transform-origin: center;
+}
+
+@media screen {
+  .preview-scale {
+    transform: scale(
+      calc(
+        min(
+          (100vw - 40px) / var(--trim-w),
+          (100vh - 40px) / var(--trim-h)
+        )
+      )
+    );
+  }
+}
+
+@media print {
+  @page {
+    size: calc(var(--trim-w) + 2 * var(--bleed))
+          calc(var(--trim-h) + 2 * var(--bleed));
+    margin: 0;
+  }
+
+  body { background: none; }
+  .preview-scale { transform: none !important; }
+  .guides { display: none !important; }
+}
+
+/* BLEED / TRIM */
+.bleed-page {
+  width: calc(var(--trim-w) + 2 * var(--bleed));
+  height: calc(var(--trim-h) + 2 * var(--bleed));
+  position: relative;
+  background: white;
+}
+
+.trim {
+  position: absolute;
+  top: var(--bleed);
+  left: var(--bleed);
+  width: var(--trim-w);
+  height: var(--trim-h);
+  overflow: hidden;
+}
+
+/* GUIDES (OPTIONAL) */
+.guides { display: none; pointer-events: none; }
+body.show-guides .guides { display: block; }
+
+.guide-trim {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(255,0,0,0.5);
+}
+
+.guide-bleed {
+  position: absolute;
+  inset: calc(-1 * var(--bleed));
+  border: 2px dashed rgba(0,128,0,0.5);
+}
+
+/*new */
+* BASE */
+.postcard-front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+/* ===== TOP SECTION ===== */
+.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.00in;
+  display: flex;
+}
+
+/* PHOTO AREA */
+.photo {
+  width: 60%;
+  background: #bfbfbf;
+  display: grid;
+  place-items: center;
+  font-size: 0.20in;
+  color: #555;
+}
+
+/* HEADLINE AREA */
+.headline {
+  width: 40%;
+  background: var(--red);
+  color: #fff;
+  padding: 0.22in;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.08in;
+}
+
+.headline .small {
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.36in;
+  letter-spacing: 0.05em;
+}
+
+.headline .bar {
+  background: var(--black);
+  padding: 0.06in 0.12in;
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.46in;
+  letter-spacing: 0.06em;
+  width: fit-content;
+}
+
+.headline .bottom {
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.34in;
+  letter-spacing: 0.05em;
+}
+
+/* ===== DIAGONAL BANNER ===== */
+.banner {
+  position: absolute;
+  left: -0.40in;
+  top: 1.60in;
+  width: 7.20in;
+  height: 0.70in;
+  background: var(--black);
+  transform: rotate(-6deg);
+  display: flex;
+  align-items: center;
+  padding-left: 0.70in;
+  gap: 0.35in;
+}
+
+.banner .dont {
+  font-family: "Brush Script MT", cursive;
+  font-size: 0.48in;
+  color: var(--red);
+}
+
+.banner .bring {
+  font-family: "Brush Script MT", cursive;
+  font-size: 0.52in;
+  color: #fff;
+}
+
+/* ===== BOTTOM SECTION ===== */
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.25in;
+}
+
+/* LOGO */
+.logo {
+  position: absolute;
+  left: 0.20in;
+  bottom: 0.25in;
+  width: 2.10in;
+  height: 1.05in;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #444, #111);
+  border: 0.06in solid #aaa;
+  display: grid;
+  place-items: center;
+}
+
+.logo span {
+  font-family: "Brush Script MT", cursive;
+  font-size: 0.46in;
+  color: #fff;
+}
+
+.logo .red { color: var(--red); }
+
+/* CONTACT */
+.contact {
+  position: absolute;
+  left: 2.45in;
+  bottom: 0.35in;
+  width: 1.90in;
+  text-align: center;
+}
+
+.contact .phone {
+  color: var(--red);
+  font-size: 0.22in;
+  font-weight: 800;
+}
+
+.contact .web {
+  font-size: 0.16in;
+  font-weight: 700;
+}
+
+.contact .addr {
+  margin-top: 0.18in;
+  font-size: 0.16in;
+  font-weight: 700;
+}
+
+/* OFFER */
+.offer {
+  position: absolute;
+  right: 0.20in;
+  bottom: 0.25in;
+  width: 2.10in;
+  height: 1.15in;
+  border: 0.05in solid var(--red);
+  padding: 0.12in;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.offer .row {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.10in;
+}
+
+.offer .save {
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.36in;
+  color: var(--red);
+}
+
+.offer .amt {
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.44in;
+}
+
+.offer .fine {
+  margin-top: 0.06in;
+  font-size: 0.12in;
+  font-weight: 600;
+}
+/*end new*/
+</style>
+</head>
+
+<body class="show-guides">
+<!-- Guides are screen-only and will NOT print -->
+
+
+<div class="preview-scale">
+  <div class="bleed-page">
+
+    <div class="guide-bleed guides"></div>
+
+    <div class="trim">
+      <div class="guide-trim guides"></div>
+      <div class="postcard-front">
+
+  <!-- TOP -->
+  <div class="top">
+    <div class="photo">PHOTO AREA</div>
+
+    <div class="headline">
+      <div class="small">IS YOUR CAR'S</div>
+      <div class="bar">OIL CHANGE</div>
+      <div class="bottom">PAST DUE?</div>
+    </div>
+  </div>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <div class="dont">Don't wait!</div>
+    <div class="bring">Bring it in today!</div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom">
+
+    <div class="logo">
+      <span>Speed-<span class="red">Away</span></span>
+    </div>
+
+    <div class="contact">
+      <div class="phone">555-555-5555</div>
+      <div class="web">SpeedAway.com</div>
+      <div class="addr">
+        1234 Speed Ave<br>
+        Springfield, IL
+      </div>
+    </div>
+
+    <div class="offer">
+      <div class="row">
+        <div class="save">SAVE</div>
+        <div class="amt">$10</div>
+      </div>
+      <div class="fine">
+        Valid on oil change only. One per vehicle.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
