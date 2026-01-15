@@ -2,17 +2,18 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Postcard Front – Empty Template</title>
+<title>Postcard Front</title>
 
 <style>
 :root {
   --trim-w: 6.25in;
   --trim-h: 4.25in;
   --bleed: 0.125in;
- --edge: 65%;
- /* apex and gap are for the top shape, reduce to reduce edge and gap equally wll reduce top shape height and increate bottom shape */
+
+  --edge: 65%;
   --apex: 73%;
-  --gap:  4%;}
+  --gap: 4%;
+}
 
 body {
   margin: 0;
@@ -23,18 +24,14 @@ body {
   height: 100vh;
 }
 
-.preview-scale {
-  transform-origin: center;
-}
+.preview-scale { transform-origin: center; }
 
 @media screen {
   .preview-scale {
     transform: scale(
-      calc(
-        min(
-          (100vw - 40px) / var(--trim-w),
-          (100vh - 40px) / var(--trim-h)
-        )
+      min(
+        (100vw - 40px) / var(--trim-w),
+        (100vh - 40px) / var(--trim-h)
       )
     );
   }
@@ -46,18 +43,16 @@ body {
           calc(var(--trim-h) + 2 * var(--bleed));
     margin: 0;
   }
-
   body { background: none; }
   .preview-scale { transform: none !important; }
-  .guides { display: none !important; }
 }
 
-/* BLEED / TRIM */
+/* ===== bleed / trim ===== */
 .bleed-page {
   width: calc(var(--trim-w) + 2 * var(--bleed));
   height: calc(var(--trim-h) + 2 * var(--bleed));
-  position: relative;
   background: white;
+  position: relative;
 }
 
 .trim {
@@ -69,129 +64,169 @@ body {
   overflow: hidden;
 }
 
-/* GUIDES (OPTIONAL) */
-.guides { display: none; pointer-events: none; }
-body.show-guides .guides { display: block; }
+.postcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-.guide-trim {
+/* ===== shared layer ===== */
+.layer {
   position: absolute;
   inset: 0;
-  border: 2px dashed rgba(255,0,0,0.5);
 }
 
-.guide-bleed {
-  position: absolute;
-  inset: calc(-1 * var(--bleed));
-  border: 2px dashed rgba(0,128,0,0.5);
-}
-
-
-/* all layers share the SAME coordinate system (the postcard) */
-.layer{
-  position:absolute;
-  inset:0;
-}
-
-.black{
-  background:#111;
+/* ===== shapes ===== */
+.black {
+  z-index: 1;
+  background: #111;
   clip-path: polygon(
     0 0,
     100% 0,
     100% var(--edge),
-    50%  var(--apex),
-    0    var(--edge)
+    50% var(--apex),
+    0 var(--edge)
   );
 }
 
-.red{
-  background:#c62828;
+.image {
+  z-index: 2;
   clip-path: polygon(
-    0    calc(var(--edge) + var(--gap)),
-    50%  calc(var(--apex) + var(--gap)),
+    0 0,
+    100% 0,
+    100% var(--edge),
+    50% var(--apex),
+    0 var(--edge)
+  );
+}
+
+.image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://oceansidesmogandautorepair.com/images/smog-hero.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left center;
+  transform: translateX(40%) translateY(-4%);
+}
+
+.red {
+  z-index: 3;
+  background: #c62828;
+  clip-path: polygon(
+    0 calc(var(--edge) + var(--gap)),
+    50% calc(var(--apex) + var(--gap)),
     100% calc(var(--edge) + var(--gap)),
     100% 100%,
     0 100%
   );
 }
 
-/* NEW: image layer, clipped like black */
-/*
-.image {
-  background-image: url("https://oceansidesmogandautorepair.com/images/smog-hero.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right center;
+/* ===== TEXT MASK (same as black) ===== */
+.text-mask {
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
 
   clip-path: polygon(
     0 0,
     100% 0,
     100% var(--edge),
-    50%  var(--apex),
-    0    var(--edge)
-  );
-
-  position: absolute;   
-  inset: 0;             
-}
-*/
-.image{
-  position:absolute;
-  inset:0;
-
-  /* stencil only — NO image here */
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% var(--edge),
-    50%  var(--apex),
-    0    var(--edge)
+    50% var(--apex),
+    0 var(--edge)
   );
 }
 
-.image::before{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background-image: url("https://oceansidesmogandautorepair.com/images/smog-hero.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left center;
-
-  /* THE KEY OFFSETS */
-  transform:
-    translateX(40%)       /* horizontal placement */
-    translateY(-4%);      /* preserves the gap */
-
-  will-change: transform;
+/* ===== TEXT COLUMN (THIS is the “section”) ===== */
+.text-column {
+  position: absolute;
+  top: 0.30in;
+  left: 0.30in;
+  width: 2.75in;   /* hard stop before image */
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ===== typography ===== */
+.brand-script {
+  font-family: "Pacifico", "Segoe Script", "Brush Script MT", cursive; /* KEEP */
+  font-size: 0.30in;
+  font-weight: 400;
+  color: #d0d0d0;
+  line-height: 1.1;
+  margin: 0 0 0.05in 0;
+}
 
-.black { z-index: 1; }
-.image { z-index: 2; }
-.red   { z-index: 3; }
+.headline {
+  font-size: 0.42in;
+  font-weight: 800;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.script {
+  font-size: 0.28in;
+  font-weight: 400;
+  margin: 0.05in 0 0.08in 0;
+}
+
+.price {
+  font-size: 0.65in;
+  font-weight: 900;
+  margin: 0;
+}
+
+.terms {
+  font-size: 0.12in;
+  line-height: 1.2;
+  margin-top: 0.05in;
+  opacity: 0.9;
+}
+
+.header-bar {
+  z-index: 20;                 /* above everything */
+  background: #c62828;         /* same as .red */
+  height: calc(var(--trim-h) * 0.08);  /* 1/8 of postcard height */
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 </style>
 </head>
 
-<body class="show-guides">
-<!-- Guides are screen-only and will NOT print -->
-
+<body>
 
 <div class="preview-scale">
   <div class="bleed-page">
-
-    <div class="guide-bleed guides"></div>
-
     <div class="trim">
-      <div class="guide-trim guides"></div>
-        <div class="postcard">
-          <div class="layer black"></div>
-          <div class="layer image"></div>
-          <div class="layer red"></div>
-        </div>      
-    </div>
+      <div class="postcard">
+        <div class="layer header-bar"></div>
 
+        <div class="layer black"></div>
+        <div class="layer image"></div>
+
+        <!-- ALL TEXT (clipped to black area) -->
+        <div class="layer text-mask">
+          <div class="text-column">
+            <div class="brand-script">Special</div>
+            <div class="headline">FAST<br>SMOG<br>CHECK</div>
+            <div class="script">Special</div>
+            <div class="price">$49.99</div>
+            <div class="terms">
+              * Price includes certificate. Gas vehicles only.
+              Extra fees may apply for SUVs and trucks.
+              See shop for details.
+            </div>
+          </div>
+        </div>
+
+        <div class="layer red"></div>
+
+      </div>
+    </div>
   </div>
 </div>
 
