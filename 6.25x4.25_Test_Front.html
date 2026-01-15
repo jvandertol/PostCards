@@ -125,7 +125,7 @@ body {
 
 /* ===== TEXT MASK (same as black) ===== */
 .text-mask {
-  z-index: 10;
+  z-index: 30;
   pointer-events: none;
   overflow: hidden;
 
@@ -158,6 +158,15 @@ body {
   margin: 0 0 0.05in 0;
 }
 
+.medium-headline {
+    font-size: .35in;
+}
+
+.upslope { 
+  display: inline-block;        /* REQUIRED for rotation */
+  transform: rotate(-6deg);     /* slopes up left → right */
+  transform-origin: left bottom;}
+
 .headline {
   font-size: 0.42in;
   font-weight: 800;
@@ -165,12 +174,13 @@ body {
   margin: 0;
 }
 
+/*
 .script {
   font-size: 0.28in;
   font-weight: 400;
   margin: 0.05in 0 0.08in 0;
 }
-
+*/
 .price {
   font-size: 0.65in;
   font-weight: 900;
@@ -185,14 +195,38 @@ body {
 }
 
 .header-bar {
-  z-index: 20;                 /* above everything */
-  background: #c62828;         /* same as .red */
-  height: calc(var(--trim-h) * 0.08);  /* 1/8 of postcard height */
-  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: calc(var(--trim-h) * 0.08);
+  background: #fff;
+  z-index: 20;
 }
+
+
+.header-icon {
+  position: absolute;
+  left: 0.15in;          
+  top: 50%;
+  transform: translateY(-50%);
+  height: 0.18in;
+  width: auto;
+}
+
+.header-text {
+  position: absolute;
+  left: 0.5in;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-family: "Bebas Neue", "Oswald", Arial, sans-serif;
+  font-size: 0.2in;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #5EC0E6;
+}
+
 
 </style>
 </head>
@@ -203,7 +237,15 @@ body {
   <div class="bleed-page">
     <div class="trim">
       <div class="postcard">
-        <div class="layer header-bar"></div>
+        <div class="layer header-bar">
+            <svg class="header-icon" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M10,30 C50,-20 150,80 190,30" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M10,60 C50,10 150,110 190,60" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M10,90 C50,40 150,140 190,90" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
+</svg>
+
+            <div class="header-text">Clear Blue Smog</div>
+        </div>
 
         <div class="layer black"></div>
         <div class="layer image"></div>
@@ -211,9 +253,9 @@ body {
         <!-- ALL TEXT (clipped to black area) -->
         <div class="layer text-mask">
           <div class="text-column">
-            <div class="brand-script">Special</div>
+            <!-- <div class="brand-script">Special</div> -->
             <div class="headline">FAST<br>SMOG<br>CHECK</div>
-            <div class="script">Special</div>
+            <div class="brand-script upslope medium-headline">Special</div>
             <div class="price">$49.99</div>
             <div class="terms">
               * Price includes certificate. Gas vehicles only.
