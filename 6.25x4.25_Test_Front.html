@@ -141,11 +141,12 @@ body {
 /* ===== TEXT COLUMN (THIS is the “section”) ===== */
 .text-column {
   position: absolute;
-  top: 0.30in;
+  top: 0.35in;
   left: 0.30in;
-  width: 2.75in;   /* hard stop before image */
+  width: 2.25in;   /* hard stop before image */
   color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-wrap: break-word;
 }
 
 /* ===== typography ===== */
@@ -168,8 +169,8 @@ body {
   transform-origin: left bottom;}
 
 .headline {
-  font-size: 0.42in;
-  font-weight: 800;
+  font-size: 0.32in;
+/*  font-weight: 800;*/
   line-height: 0.95;
   margin: 0;
 }
@@ -182,9 +183,10 @@ body {
 }
 */
 .price {
-  font-size: 0.65in;
+  font-size: 0.55in;
   font-weight: 900;
   margin: 0;
+  color:red;
 }
 
 .terms {
@@ -253,10 +255,9 @@ body {
         <!-- ALL TEXT (clipped to black area) -->
         <div class="layer text-mask">
           <div class="text-column">
-            <!-- <div class="brand-script">Special</div> -->
-            <div class="headline">FAST<br>SMOG<br>CHECK</div>
-            <div class="brand-script upslope medium-headline">Special</div>
+            <div class="headline">Smog Check Reminder</div>
             <div class="price">$49.99</div>
+            <div class="brand-script upslope medium-headline">Special</div>
             <div class="terms">
               * Price includes certificate. Gas vehicles only.
               Extra fees may apply for SUVs and trucks.

@@ -2,13 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Postcard Front – Empty Template</title>
+<title>Postcard Front</title>
 
 <style>
 :root {
   --trim-w: 6.25in;
   --trim-h: 4.25in;
   --bleed: 0.125in;
+
+  /* LOGO TILE */
+  --smog-logo: url("silver-smog-logo.png");
 }
 
 body {
@@ -27,11 +30,9 @@ body {
 @media screen {
   .preview-scale {
     transform: scale(
-      calc(
-        min(
-          (100vw - 40px) / var(--trim-w),
-          (100vh - 40px) / var(--trim-h)
-        )
+      min(
+        (100vw - 40px) / var(--trim-w),
+        (100vh - 40px) / var(--trim-h)
       )
     );
   }
@@ -46,15 +47,14 @@ body {
 
   body { background: none; }
   .preview-scale { transform: none !important; }
-  .guides { display: none !important; }
 }
 
 /* BLEED / TRIM */
 .bleed-page {
   width: calc(var(--trim-w) + 2 * var(--bleed));
   height: calc(var(--trim-h) + 2 * var(--bleed));
-  position: relative;
   background: white;
+  position: relative;
 }
 
 .trim {
@@ -66,80 +66,37 @@ body {
   overflow: hidden;
 }
 
-/* GUIDES (OPTIONAL) */
-.guides { display: none; pointer-events: none; }
-body.show-guides .guides { display: block; }
-
-.guide-trim {
-  position: absolute;
-  inset: 0;
-  border: 2px dashed rgba(255,0,0,0.5);
-}
-
-.guide-bleed {
-  position: absolute;
-  inset: calc(-1 * var(--bleed));
-  border: 2px dashed rgba(0,128,0,0.5);
-}
-
-/*NEW*/
 /* =========================
-   FRONT – MATCHES MCS OIL CHANGE LAYOUT
-   Drop-in content for inside .trim
+   POSTCARD FRONT
 ========================= */
 
 .postcard-front {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
   background: #fff;
 }
 
-/* Layout columns + bottom band */
-.postcard-front .left {
+/* LEFT PANEL */
+.left {
   position: absolute;
   top: 0;
   left: 0;
-  width: 4.05in;           /* ~65% of 6.25in */
-  height: 3.50in;          /* top area above footer */
-  overflow: hidden;
-}
-
-.postcard-front .right {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 2.20in;           /* ~35% of 6.25in */
+  width: 4.05in;
   height: 3.50in;
-  background: #8d8d8d;
-  overflow: hidden;
 }
 
-.postcard-front .footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 0.75in;
-  background: #5f5f5f;
-  color: #fff;
-}
-
-/* Left photo */
-.postcard-front .photo {
+.photo {
   position: absolute;
   inset: 0;
+  background-image: url("https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80");
   background-size: cover;
   background-position: center;
-  /* Replace this with your own photo */
-  background-image: url("https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80");
   transform: scale(1.03);
 }
 
-/* Dark overlay panel on left (angled) */
-.postcard-front .left-overlay {
+.left-overlay {
   position: absolute;
   top: 0.25in;
   left: 0.20in;
@@ -147,65 +104,62 @@ body.show-guides .guides { display: block; }
   height: 2.35in;
   background: rgba(0,0,0,0.55);
   clip-path: polygon(0% 0%, 88% 0%, 100% 18%, 100% 100%, 0% 100%);
-  padding: 0.22in 0.22in 0.18in 0.22in;
+  padding: 0.22in;
   box-sizing: border-box;
   color: #fff;
 }
 
-/* Headline */
-.postcard-front .headline {
-  font-weight: 300;
-  letter-spacing: 0.01in;
-  text-transform: uppercase;
-  line-height: 1.02;
+.headline {
   margin: 0;
   font-size: 0.40in;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1.02;
 }
 
-.postcard-front .headline .bold {
+.headline .bold {
   font-weight: 900;
 }
 
-/* Divider bar under headline */
-.postcard-front .headline-bar {
+.headline-bar {
   margin-top: 0.12in;
   height: 0.08in;
   background: rgba(0,0,0,0.55);
 }
 
-/* Body copy blocks in overlay */
-.postcard-front .copy {
+.copy {
   margin-top: 0.12in;
   font-size: 0.14in;
   line-height: 1.35;
-  color: rgba(255,255,255,0.90);
+  color: rgba(255,255,255,0.9);
 }
 
-.postcard-front .copy + .copy {
-  margin-top: 0.14in;
-  color: rgba(255,255,255,0.80);
+/* RIGHT PANEL */
+.right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.20in;
+  height: 3.50in;
+
+  background-color: #8d8d8d;
+  background-image: var(--smog-logo);
+  background-repeat: repeat;
+  background-size: 0.90in 0.90in;
+  background-position: center;
 }
 
-/* Right panel subtle pattern (simple diagonal) */
-.postcard-front .right::before {
+/* contrast overlay for readability */
+.right::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      rgba(255,255,255,0.10) 0px,
-      rgba(255,255,255,0.10) 10px,
-      rgba(0,0,0,0.06) 10px,
-      rgba(0,0,0,0.06) 20px
-    );
-  opacity: 0.35;
-  pointer-events: none;
+  background: rgba(0,0,0,0.28);
 }
 
-/* Right content */
-.postcard-front .right-inner {
-  position: absolute;
+.right-inner {
+  position: relative;
+  z-index: 1;
   inset: 0;
   padding: 0.30in 0.25in;
   box-sizing: border-box;
@@ -213,206 +167,160 @@ body.show-guides .guides { display: block; }
   text-align: center;
 }
 
-.postcard-front .logo {
+.logo {
   display: inline-block;
   padding: 0.06in 0.18in;
   border: 2px solid rgba(255,255,255,0.75);
   border-radius: 999px;
-  font-style: italic;
   font-size: 0.18in;
-  letter-spacing: 0.01in;
+  font-style: italic;
   margin-bottom: 0.18in;
-  background: rgba(0,0,0,0.10);
 }
 
-.postcard-front .right-title {
+.right-title {
   margin: 0;
   font-size: 0.28in;
   font-weight: 700;
-  letter-spacing: 0.01in;
   text-transform: uppercase;
 }
 
-.postcard-front .right-script {
+.right-script {
   margin: 0.06in 0 0.18in;
   font-size: 0.30in;
   font-style: italic;
   font-weight: 600;
 }
 
-.postcard-front .offer-box {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0.18in 0.12in 0.16in;
-  box-sizing: border-box;
+.offer-box {
   border: 2px solid rgba(255,255,255,0.75);
   background: rgba(255,255,255,0.10);
+  padding: 0.18in 0.12in;
 }
 
-.postcard-front .offer-top {
+.offer-top {
   font-size: 0.18in;
   font-weight: 700;
-  letter-spacing: 0.01in;
   text-transform: uppercase;
-  line-height: 1.1;
 }
 
-.postcard-front .offer-only {
+.offer-only {
   margin-top: 0.08in;
   font-size: 0.28in;
   font-style: italic;
   font-weight: 700;
 }
 
-.postcard-front .offer-price {
+.offer-price {
   margin-top: 0.06in;
   font-size: 0.55in;
   font-weight: 900;
-  letter-spacing: 0.01in;
-  line-height: 1;
 }
 
-/* Footer content */
-.postcard-front .footer-inner {
+/* FOOTER */
+.footer {
   position: absolute;
-  inset: 0;
-  padding: 0.14in 0.25in;
-  box-sizing: border-box;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.75in;
+  background: #5f5f5f;
+  color: #fff;
+}
+
+.footer-inner {
   display: flex;
   gap: 0.25in;
+  padding: 0.14in 0.25in;
   align-items: flex-end;
 }
 
-.postcard-front .footer-left {
+.footer-left {
   width: 2.70in;
   font-size: 0.40in;
-  font-weight: 300;
-  letter-spacing: 0.01in;
   text-transform: uppercase;
-  line-height: 1;
 }
 
-.postcard-front .footer-left .bold {
+.footer-left .bold {
   font-weight: 900;
 }
 
-.postcard-front .footer-mid {
+.footer-mid {
   flex: 1;
   text-align: center;
   font-size: 0.16in;
   font-style: italic;
   font-weight: 700;
-  letter-spacing: 0.01in;
-  margin-bottom: 0.08in;
-  white-space: nowrap;
 }
 
-.postcard-front .footer-addrs {
+.footer-addrs {
   width: 2.80in;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3,1fr);
   gap: 0.12in;
   font-size: 0.12in;
   text-align: center;
-  line-height: 1.25;
 }
 
-.postcard-front .addr strong {
+.footer-addrs strong {
   display: block;
   font-size: 0.13in;
-  font-weight: 700;
 }
-
-/*END NEW*/
-
 </style>
 </head>
 
-<body class="show-guides">
-<!-- Guides are screen-only and will NOT print -->
-
+<body>
 
 <div class="preview-scale">
   <div class="bleed-page">
-
-    <div class="guide-bleed guides"></div>
-
     <div class="trim">
-      <div class="guide-trim guides"></div>
       <div class="postcard-front">
 
-  <!-- LEFT PHOTO AREA -->
-  <div class="left">
-    <div class="photo"></div>
-
-    <div class="left-overlay">
-      <h1 class="headline">
-        WE’LL<br>
-        KEEP YOUR <span class="bold">ENGINE</span><br>
-        CLEAN
-      </h1>
-
-      <div class="headline-bar"></div>
-
-      <div class="copy">
-        Lorem ipsum dolor sit amet, con sectetur adipiscing elit. Null am
-        blandit a ex sit amet venenatis.
-      </div>
-
-      <div class="copy">
-        Sed cursus orci ut lectus consequat, in eleifend nulla bibendum.
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT GRAY PANEL -->
-  <div class="right">
-    <div class="right-inner">
-      <div class="logo">Speed-Away</div>
-
-      <div class="right-title">Oil Change</div>
-      <div class="right-script">Special</div>
-
-      <div class="offer-box">
-        <div class="offer-top">Conventional<br>Oil Change</div>
-        <div class="offer-only">only</div>
-        <div class="offer-price">$19.95</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTTOM FOOTER BAR -->
-  <div class="footer">
-    <div class="footer-inner">
-
-      <div class="footer-left">
-        <span class="bold">SPEED</span>AWAY.com
-      </div>
-
-      <div class="footer-mid">THREE GREAT LOCATIONS!!!</div>
-
-      <div class="footer-addrs">
-        <div class="addr">
-          <strong>1234 Speed Avenue</strong>
-          Detroit, MI 55555
+        <div class="left">
+          <div class="photo"></div>
+          <div class="left-overlay">
+            <h1 class="headline">
+              WE’LL<br>
+              KEEP YOUR <span class="bold">ENGINE</span><br>
+              CLEAN
+            </h1>
+            <div class="headline-bar"></div>
+            <div class="copy">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </div>
+            <div class="copy">
+              Sed cursus orci ut lectus consequat.
+            </div>
+          </div>
         </div>
-        <div class="addr">
-          <strong>1234 Speed Avenue</strong>
-          Detroit, MI 55555
+
+        <div class="right">
+          <div class="right-inner">
+            <div class="logo">Speed-Away</div>
+            <div class="right-title">Oil Change</div>
+            <div class="right-script">Special</div>
+
+            <div class="offer-box">
+              <div class="offer-top">Conventional<br>Oil Change</div>
+              <div class="offer-only">only</div>
+              <div class="offer-price">$19.95</div>
+            </div>
+          </div>
         </div>
-        <div class="addr">
-          <strong>1234 Speed Avenue</strong>
-          Detroit, MI 55555
+
+        <div class="footer">
+          <div class="footer-inner">
+            <div class="footer-left"><span class="bold">SPEED</span>AWAY.com</div>
+            <div class="footer-mid">THREE GREAT LOCATIONS!!!</div>
+            <div class="footer-addrs">
+              <div><strong>1234 Speed Ave</strong>Detroit, MI</div>
+              <div><strong>1234 Speed Ave</strong>Detroit, MI</div>
+              <div><strong>1234 Speed Ave</strong>Detroit, MI</div>
+            </div>
+          </div>
         </div>
+
       </div>
-
     </div>
-  </div>
-
-</div>
-
-    </div>
-
   </div>
 </div>
 
