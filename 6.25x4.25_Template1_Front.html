@@ -64,6 +64,11 @@ body {
   overflow: hidden;
 }
 
+/* ===== end formattting ==== */
+
+.lightbluetext {
+  color:#5EC0E6 !important;
+}
 .postcard {
   position: relative;
   width: 100%;
@@ -190,7 +195,7 @@ body {
 }
 
 .terms {
-  font-size: 0.12in;
+  font-size: 0.10in;
   line-height: 1.2;
   margin-top: 0.05in;
   opacity: 0.9;
@@ -229,6 +234,57 @@ body {
   color: #5EC0E6;
 }
 
+.header-left {
+  left: 0.5in;
+}
+
+.header-right {
+  right: 0.5in;
+  left: auto;              /* override left positioning */
+  text-align: right;
+}
+
+/*smog logos*/
+
+/* ===== LOGO RAIL ===== */
+.logo-rail {
+  position: absolute;
+  z-index: 25;                /* above red, below header text */
+
+  /* horizontal span: middle → right edge */
+  left: 50%;
+  right: 0.25in;
+
+  /* vertical positioning: follows red top edge */
+  top: calc(var(--edge) - 0.85in);
+  height: 0.9in;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+/* ===== INDIVIDUAL LOGO SLOT ===== */
+.logo {
+  width: 0.9in;               /* fixed slot */
+  height: 0.9in;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Normalize logo size by height only */
+.logo image {
+  max-height: 70%;
+  width: auto;
+}
+
+
+
+/* end smog logos*/
 
 </style>
 </head>
@@ -241,12 +297,19 @@ body {
       <div class="postcard">
         <div class="layer header-bar">
             <svg class="header-icon" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M10,30 C50,-20 150,80 190,30" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
-  <path d="M10,60 C50,10 150,110 190,60" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
-  <path d="M10,90 C50,40 150,140 190,90" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
-</svg>
+          <path d="M10,30 C50,-20 150,80 190,30" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
+          <path d="M10,60 C50,10 150,110 190,60" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
+          <path d="M10,90 C50,40 150,140 190,90" fill="none" stroke="#5ec0e6" stroke-width="6" stroke-linecap="round"/>
+        </svg>
 
-            <div class="header-text">Clear Blue Smog</div>
+        <div class="header-text header-left lightbluetext">
+          Clear Blue Test Only
+        </div>
+
+        <div class="header-text header-right lightbluetext">
+          925-483-6205
+        </div>
+        
         </div>
 
         <div class="layer black"></div>
@@ -257,14 +320,90 @@ body {
           <div class="text-column">
             <div class="headline">Smog Check Reminder</div>
             <div class="price">$49.99</div>
-            <div class="brand-script upslope medium-headline">Special</div>
+            <div class="brand-script upslope medium-headline lightbluetext">Special</div>
             <div class="terms">
-              * Price includes certificate. Gas vehicles only.
+              * Price includes certificate. 2000 &amp; later gas light use vehicles only.
               Extra fees may apply for SUVs and trucks.
               See shop for details.
             </div>
           </div>
         </div>
+
+        <!-- LOGO RAIL (NEW) -->
+        <div class="layer logo-rail">
+          <!-- DMV -->
+          <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+            <image href="dmvseal.png" x="15" y="15" width="70" height="70"
+                   preserveAspectRatio="xMidYMid meet"/>
+          </svg>
+
+          <!-- Smog -->
+          <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+            <image href="smog-logo.png" x="15" y="15" width="70" height="70"
+                   preserveAspectRatio="xMidYMid meet"/>
+          </svg>
+
+          <!-- STAR (remove this whole svg if only 2 logos) -->
+          <!-- <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+            <image
+              href="STAR-logo.png"
+              x="10"
+              y="10"
+              width="80"
+              height="80"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg> -->
+
+
+
+        </div>
+
+        <div class="layer red-content">
+  <div class="red-columns">
+
+    <!-- LEFT: BUSINESS INFO -->
+    <div class="red-col business">
+      <div class="biz-name">Clear Blue Smog</div>
+      <div class="biz-address">
+        123 Main Street<br>
+        Pleasanton, CA
+      </div>
+      <div class="biz-phone">925-483-6205</div>
+      <div class="biz-web">clearbluesmog.com</div>
+    </div>
+
+    <!-- CENTER: HOURS / APPOINTMENT -->
+    <div class="red-col hours">
+      <div class="hours-title">Hours</div>
+      <div class="hours-text">
+        Mon–Fri: 8am–5pm<br>
+        Sat: 9am–2pm
+      </div>
+
+      <!-- choose ONE of the following -->
+      <div class="appt emphasis">No Appointment Needed</div>
+      <!-- OR -->
+      <!--
+      <div class="appt">
+        Make an appointment online<br>
+        <span class="url">clearbluesmog.com</span>
+      </div>
+      -->
+    </div>
+
+    <!-- RIGHT: SELLING POINTS -->
+    <div class="red-col points">
+      <ul>
+        <li>Fast &amp; Convenient</li>
+        <li>Honest, Fair Pricing</li>
+        <li>Quality Service</li>
+        <li>Near Downtown Pleasanton</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
 
         <div class="layer red"></div>
 
