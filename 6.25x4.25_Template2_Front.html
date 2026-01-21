@@ -11,6 +11,7 @@
   --bleed: 0.125in;
     --red: #b1121b;
   --black: #111;
+  --side-gutter: 0.30in;
 }
 
 body {
@@ -239,16 +240,18 @@ body.show-guides .guides { display: block; }
 /* CENTER COLUMN: VALUE PROPOSITION */
 .value-prop {
   position: absolute;
-  left: 2.60in;
-  right: 2.60in;
-  bottom: 0.30in;   /* was 0.55in */
+
+  left: calc(2.10in + 0.20in + var(--side-gutter));
+  right: calc(1.80in + 0.0in + var(--side-gutter));
+
+  bottom: 0.25in;
   text-align: center;
   font-family: Impact, Arial Black, sans-serif;
   color: #111;
 }
 
 .value-line {
-  font-size: 0.28in;
+  font-size: 0.22in;
   letter-spacing: 0.05em;
   line-height: 1.15;
 }
@@ -260,7 +263,7 @@ body.show-guides .guides { display: block; }
   bottom: 0.10in;
   width: 2.10in;
   height: 1.15in;
-  border: 0.05in solid var(--red);
+  border: 0.05in dashed var(--red);
   padding: 0.12in;
   box-sizing: border-box;
   text-align: center;
