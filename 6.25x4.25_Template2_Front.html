@@ -100,7 +100,7 @@ body.show-guides .guides { display: block; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 2.00in;
+  height: 2.30in;
   display: flex;
 }
 
@@ -116,35 +116,49 @@ body.show-guides .guides { display: block; }
 
 /* HEADLINE AREA */
 .headline {
-  width: 40%;
+  width: 48%;
   background: var(--red);
   color: #fff;
-  padding: 0.22in;
+
+  /* give "IS YOUR" breathing room */
+  padding: 0.2in 0.22in 0.22in;   /* top right/left bottom */
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.08in;
+
+  /* critical: stop centering the stack */
+  justify-content: flex-start;
+
+  /* slightly tighter so content stays higher */
+  gap: 0.06in;
 }
 
 .headline .small {
   font-family: Impact, Arial Black, sans-serif;
-  font-size: 0.36in;
+  font-size: 0.26in;
   letter-spacing: 0.05em;
 }
 
 .headline .bar {
+  display: block;
   background: var(--black);
-  padding: 0.06in 0.12in;
+
+  /* escape parent padding */
+  margin-left: -0.22in;
+  margin-right: -0.22in;
+
+  padding: 0.06in 0.22in;
+
   font-family: Impact, Arial Black, sans-serif;
-  font-size: 0.46in;
+  font-size: 0.4in;
   letter-spacing: 0.06em;
-  width: fit-content;
 }
 
-.headline .bottom {
+
+.headline-bottom {
   font-family: Impact, Arial Black, sans-serif;
-  font-size: 0.34in;
+  font-size: 0.30in;
   letter-spacing: 0.05em;
 }
 
@@ -152,7 +166,7 @@ body.show-guides .guides { display: block; }
 .banner {
   position: absolute;
   left: -0.40in;
-  top: 1.60in;
+  top: 1.9in;
   width: 7.20in;
   height: 0.70in;
   background: var(--black);
@@ -176,98 +190,108 @@ body.show-guides .guides { display: block; }
 }
 
 /* ===== BOTTOM SECTION ===== */
+/* ===== BOTTOM CONTENT (NO LOGO) ===== */
+
 .bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2.25in;
+  height: 1.95in; /* matches your adjusted math */
 }
 
-/* LOGO */
-.logo {
+/* LEFT COLUMN: COMPANY INFO */
+.company-info {
   position: absolute;
-  left: 0.20in;
-  bottom: 0.25in;
-  width: 2.10in;
-  height: 1.05in;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, #444, #111);
-  border: 0.06in solid #aaa;
-  display: grid;
-  place-items: center;
+  right: 0.0in;    /* was left */
+  bottom: 0.05in;
+  width: 1.80in;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  text-align: left;
 }
 
-.logo span {
-  font-family: "Brush Script MT", cursive;
-  font-size: 0.46in;
-  color: #fff;
-}
-
-.logo .red { color: var(--red); }
-
-/* CONTACT */
-.contact {
-  position: absolute;
-  left: 2.45in;
-  bottom: 0.35in;
-  width: 1.90in;
-  text-align: center;
-}
-
-.contact .phone {
-  color: var(--red);
-  font-size: 0.22in;
+.company-name {
   font-weight: 800;
+  font-size: 0.20in;
+  margin-bottom: 0.06in;
 }
 
-.contact .web {
-  font-size: 0.16in;
+.company-address {
+  font-size: 0.15in;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.10in;
+}
+
+.company-web {
+  font-size: 0.15in;
   font-weight: 700;
+  margin-bottom: 0.04in;
 }
 
-.contact .addr {
-  margin-top: 0.18in;
-  font-size: 0.16in;
-  font-weight: 700;
+.company-phone {
+  font-size: 0.20in;
+  font-weight: 800;
+  color: var(--red);
 }
 
-/* OFFER */
+/* CENTER COLUMN: VALUE PROPOSITION */
+.value-prop {
+  position: absolute;
+  left: 2.60in;
+  right: 2.60in;
+  bottom: 0.30in;   /* was 0.55in */
+  text-align: center;
+  font-family: Impact, Arial Black, sans-serif;
+  color: #111;
+}
+
+.value-line {
+  font-size: 0.28in;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+}
+
+/* RIGHT: OFFER BOX */
 .offer {
   position: absolute;
-  right: 0.20in;
-  bottom: 0.25in;
+  left: 0.20in;     /* was right */
+  bottom: 0.10in;
   width: 2.10in;
   height: 1.15in;
   border: 0.05in solid var(--red);
   padding: 0.12in;
   box-sizing: border-box;
   text-align: center;
+  background: #fff;
 }
 
-.offer .row {
+.offer .row{
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 0.10in;
 }
 
-.offer .save {
+.offer .save{
   font-family: Impact, Arial Black, sans-serif;
   font-size: 0.36in;
   color: var(--red);
 }
 
-.offer .amt {
+.offer .amt{
   font-family: Impact, Arial Black, sans-serif;
   font-size: 0.44in;
 }
 
-.offer .fine {
+.offer .fine{
   margin-top: 0.06in;
   font-size: 0.12in;
   font-weight: 600;
 }
+
+
 /*end new*/
 </style>
 </head>
@@ -290,9 +314,10 @@ body.show-guides .guides { display: block; }
     <div class="photo">PHOTO AREA</div>
 
     <div class="headline">
-      <div class="small">IS YOUR CAR'S</div>
-      <div class="bar">OIL CHANGE</div>
-      <div class="bottom">PAST DUE?</div>
+      <div class="small">THIS IS YOUR </div>
+      <div class="bar">SMOG CHECK</div>
+      <div class="headline-bottom">Reminder</div>
+
     </div>
   </div>
 
@@ -305,30 +330,39 @@ body.show-guides .guides { display: block; }
   <!-- BOTTOM -->
   <div class="bottom">
 
-    <div class="logo">
-      <span>Speed-<span class="red">Away</span></span>
+  <!-- LEFT: COMPANY INFO -->
+  <div class="company-info">
+    <div class="company-name">SpeedAway Auto Service</div>
+
+    <div class="company-address">
+      1234 Speed Ave<br>
+      Springfield, IL 62701
     </div>
 
-    <div class="contact">
-      <div class="phone">555-555-5555</div>
-      <div class="web">SpeedAway.com</div>
-      <div class="addr">
-        1234 Speed Ave<br>
-        Springfield, IL
-      </div>
-    </div>
-
-    <div class="offer">
-      <div class="row">
-        <div class="save">SAVE</div>
-        <div class="amt">$10</div>
-      </div>
-      <div class="fine">
-        Valid on oil change only. One per vehicle.
-      </div>
-    </div>
-
+    <div class="company-web">www.SpeedAway.com</div>
+    <div class="company-phone">555-555-5555</div>
   </div>
+
+  <!-- CENTER: VALUE STATEMENT -->
+  <div class="value-prop">
+    <div class="value-line">FAST SERVICE</div>
+    <div class="value-line">CONVENIENT LOCATION</div>
+    <div class="value-line">QUALITY WORK</div>
+  </div>
+
+  <!-- RIGHT: OFFER (unchanged) -->
+  <div class="offer">
+    <div class="row">
+      <div class="save">SAVE</div>
+      <div class="amt">$10</div>
+    </div>
+    <div class="fine">
+      Valid on oil change only. One per vehicle.
+    </div>
+  </div>
+
+</div>
+
 
 </div>
 
