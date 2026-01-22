@@ -219,10 +219,32 @@ body.show-guides .guides { display: block; }
 }
 
 .company-name {
-  font-weight: 800;
-  font-size: 0.20in;
+  width: 100%;
+  height: 0.26in;        /* controls visual size now */
   margin-bottom: 0.06in;
 }
+
+/* SVG-scaled company name */
+.company-info .company-name {
+  width: 100%;
+  height: 0.26in;        /* slightly shorter than headline */
+  margin-bottom: 0.06in;
+}
+
+.company-name-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.company-name-svg text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 90px;       /* base size, SVG handles scaling */
+  fill: #111;            /* or var(--black) */
+  dominant-baseline: alphabetic;
+}
+
 
 .company-address {
   font-size: 0.15in;
@@ -341,7 +363,24 @@ body.show-guides .guides { display: block; }
 
   <!-- LEFT: COMPANY INFO -->
   <div class="company-info">
-    <div class="company-name">SpeedAway Auto Service</div>
+    <div class="company-name">
+  <svg
+    class="company-name-svg"
+    viewBox="0 0 1000 120"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <text
+      x="0"
+      y="85"
+      textLength="1000"
+      lengthAdjust="spacingAndGlyphs"
+    >
+      Clear Blue Smog Test Only
+    </text>
+  </svg>
+</div>
+
 
     <div class="company-address">
       1234 Speed Ave<br>
