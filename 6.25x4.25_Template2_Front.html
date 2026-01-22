@@ -108,11 +108,17 @@ body.show-guides .guides { display: block; }
 /* PHOTO AREA */
 .photo {
   width: 60%;
+  position: relative;
+  overflow: hidden;          /* important */
   background: #bfbfbf;
-  display: grid;
-  place-items: center;
-  font-size: 0.20in;
-  color: #555;
+}
+
+/* Make the image fill the photo area */
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* key line */
+  display: block;
 }
 
 /* HEADLINE AREA */
@@ -314,7 +320,7 @@ body.show-guides .guides { display: block; }
 
   <!-- TOP -->
   <div class="top">
-    <div class="photo">PHOTO AREA</div>
+    <div class="photo"><img class="photo-icon" src="mechanic-clipboard.png" alt="Mechanic with clipboard"></div>
 
     <div class="headline">
       <div class="small">THIS IS YOUR </div>
@@ -327,7 +333,7 @@ body.show-guides .guides { display: block; }
   <!-- BANNER -->
   <div class="banner">
     <div class="dont">Don't wait!</div>
-    <div class="bring">Bring it in today!</div>
+    <div class="bring">Come in today!</div>
   </div>
 
   <!-- BOTTOM -->
