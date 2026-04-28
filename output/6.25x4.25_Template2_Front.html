@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Postcard Front – Empty Template</title>
+
+<style>
+:root {
+  --trim-w: 6.25in;
+  --trim-h: 4.25in;
+  --bleed: 0.125in;
+    --red: #b1121b;
+  --black: #111;
+  --side-gutter: 0.30in;
+}
+
+body {
+  margin: 0;
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.preview-scale {
+  transform-origin: center;
+}
+
+@media screen {
+  .preview-scale {
+    transform: scale(
+      calc(
+        min(
+          (100vw - 40px) / var(--trim-w),
+          (100vh - 40px) / var(--trim-h)
+        )
+      )
+    );
+  }
+}
+
+@media print {
+  @page {
+    size: calc(var(--trim-w) + 2 * var(--bleed))
+          calc(var(--trim-h) + 2 * var(--bleed));
+    margin: 0;
+  }
+
+  body { background: none; }
+  .preview-scale { transform: none !important; }
+  .guides { display: none !important; }
+}
+
+/* BLEED / TRIM */
+.bleed-page {
+  width: calc(var(--trim-w) + 2 * var(--bleed));
+  height: calc(var(--trim-h) + 2 * var(--bleed));
+  position: relative;
+  background: white;
+}
+
+.trim {
+  position: absolute;
+  top: var(--bleed);
+  left: var(--bleed);
+  width: var(--trim-w);
+  height: var(--trim-h);
+  overflow: hidden;
+}
+
+/* GUIDES (OPTIONAL) */
+.guides { display: none; pointer-events: none; }
+body.show-guides .guides { display: block; }
+
+.guide-trim {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(255,0,0,0.5);
+}
+
+.guide-bleed {
+  position: absolute;
+  inset: calc(-1 * var(--bleed));
+  border: 2px dashed rgba(0,128,0,0.5);
+}
+
+/*new */
+* BASE */
+.postcard-front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+/* ===== TOP SECTION ===== */
+.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.30in;
+  display: flex;
+}
+
+/* PHOTO AREA */
+.photo {
+  width: 60%;
+  position: relative;
+  overflow: hidden;          /* important */
+  background: #bfbfbf;
+}
+
+/* Make the image fill the photo area */
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* key line */
+  display: block;
+}
+
+/* HEADLINE AREA */
+.headline {
+  width: 48%;
+  background: var(--red);
+  color: #fff;
+
+  /* give "IS YOUR" breathing room */
+  padding: 0.2in 0.22in 0.22in;   /* top right/left bottom */
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  /* critical: stop centering the stack */
+  justify-content: flex-start;
+
+  /* slightly tighter so content stays higher */
+  gap: 0.06in;
+}
+
+.headline .small {
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.26in;
+  letter-spacing: 0.05em;
+}
+
+.headline .bar {
+  display: block;
+  background: var(--black);
+
+  /* escape parent padding */
+  margin-left: -0.22in;
+  margin-right: -0.22in;
+
+  padding: 0.06in 0.22in;
+
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.4in;
+  letter-spacing: 0.06em;
+}
+
+
+.headline-bottom {
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.30in;
+  letter-spacing: 0.05em;
+}
+
+/* ===== DIAGONAL BANNER ===== */
+.banner {
+  position: absolute;
+  left: -0.40in;
+  top: 1.9in;
+  width: 7.20in;
+  height: 0.70in;
+  background: var(--black);
+  transform: rotate(-6deg);
+  display: flex;
+  align-items: center;
+  padding-left: 0.70in;
+  gap: 0.35in;
+}
+
+.banner .dont {
+  font-family: "Brush Script MT", cursive;
+  font-size: 0.48in;
+  color: var(--red);
+}
+
+.banner .bring {
+  font-family: "Brush Script MT", cursive;
+  font-size: 0.52in;
+  color: #fff;
+}
+
+/* ===== BOTTOM SECTION ===== */
+/* ===== BOTTOM CONTENT (NO LOGO) ===== */
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.95in; /* matches your adjusted math */
+}
+
+/* LEFT COLUMN: COMPANY INFO */
+.company-info {
+  position: absolute;
+  right: 0.1in;    /* was left */
+  bottom: 0.05in;
+  width: 1.80in;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  text-align: left;
+}
+
+.company-name {
+  width: 100%;
+  height: 0.26in;        /* controls visual size now */
+  margin-bottom: 0.06in;
+}
+
+/* SVG-scaled company name */
+.company-info .company-name {
+  width: 100%;
+  height: 0.26in;        /* slightly shorter than headline */
+  margin-bottom: 0.06in;
+}
+
+.company-name-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.company-name-svg text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 90px;       /* base size, SVG handles scaling */
+  fill: #111;            /* or var(--black) */
+  dominant-baseline: alphabetic;
+}
+
+
+.company-address {
+  font-size: 0.15in;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.10in;
+}
+
+.company-web {
+  font-size: 0.15in;
+  font-weight: 700;
+  margin-bottom: 0.04in;
+}
+
+.company-phone {
+  font-size: 0.20in;
+  font-weight: 800;
+  color: var(--red);
+}
+
+/* CENTER COLUMN: VALUE PROPOSITION */
+.value-prop {
+  position: absolute;
+
+  left: calc(2.10in + 0.20in + var(--side-gutter));
+  right: calc(1.80in + 0.0in + var(--side-gutter));
+
+  bottom: 0.25in;
+  text-align: center;
+  font-family: Impact, Arial Black, sans-serif;
+  color: #111;
+}
+
+.value-line {
+  font-size: 0.22in;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+}
+
+/* RIGHT: OFFER BOX */
+.offer {
+  position: absolute;
+  left: 0.20in;     /* was right */
+  bottom: 0.10in;
+  width: 2.10in;
+  height: 1.15in;
+  border: 0.05in dashed var(--red);
+  padding: 0.12in;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fff;
+}
+
+.offer .row{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.10in;
+}
+
+.offer .save{
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.36in;
+  color: var(--red);
+}
+
+.offer .amt{
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: 0.44in;
+}
+
+.offer .fine{
+  margin-top: 0.06in;
+  font-size: 0.12in;
+  font-weight: 600;
+}
+
+
+/*end new*/
+</style>
+</head>
+
+<body class="show-guides">
+<!-- Guides are screen-only and will NOT print -->
+
+
+<div class="preview-scale">
+  <div class="bleed-page">
+
+    <div class="guide-bleed guides"></div>
+
+    <div class="trim">
+      <div class="guide-trim guides"></div>
+      <div class="postcard-front">
+
+  <!-- TOP -->
+  <div class="top">
+    <div class="photo"><img class="photo-icon" src="mechanic-clipboard.png" alt="Mechanic with clipboard"></div>
+
+    <div class="headline">
+      <div class="small">THIS IS YOUR </div>
+      <div class="bar">SMOG CHECK</div>
+      <div class="headline-bottom">Reminder</div>
+
+    </div>
+  </div>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <div class="dont">Don't wait!</div>
+    <div class="bring">Come in today!</div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom">
+
+  <!-- LEFT: COMPANY INFO -->
+  <div class="company-info">
+    <div class="company-name">
+  <svg
+    class="company-name-svg"
+    viewBox="0 0 1000 120"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <text
+      x="0"
+      y="85"
+      textLength="1000"
+      lengthAdjust="spacingAndGlyphs"
+    >
+       Joe's Smog Check
+    </text>
+  </svg>
+</div>
+
+
+    <div class="company-address">
+      123 Main St<br/>
+      San Jose, CA 95123
+    </div>
+
+    <div class="company-web">www.joessmog.com</div>
+    <div class="company-phone">(408) 555-1234</div>
+  </div>
+
+  <!-- CENTER: VALUE STATEMENT -->
+  <div class="value-prop">
+    <div class="value-line">FAST SERVICE</div>
+    <div class="value-line">CONVENIENT LOCATION</div>
+    <div class="value-line">QUALITY WORK</div>
+  </div>
+
+  <!-- RIGHT: OFFER (unchanged) -->
+  <div class="offer">
+    <div class="row">
+      <div class="save">Special</div>
+      <div class="amt">$20</div>
+    </div>
+    <div class="fine">
+      Valid through June 30. Must present this postcard.
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

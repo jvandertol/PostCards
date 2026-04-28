@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Build Postcard (prompt)",
+      "program": "${workspaceFolder}/build.js",
+      "args": [
+        "${input:templateDir}",
+        "${input:dataFile}",
+        "${input:outputDir}"
+      ],
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "templateDir",
+      "type": "promptString",
+      "description": "Template folder path"
+    },
+    {
+      "id": "dataFile",
+      "type": "promptString",
+      "description": "Data JSON path"
+    },
+    {
+      "id": "outputDir",
+      "type": "promptString",
+      "description": "Output folder"
+    }
+  ]
+}
