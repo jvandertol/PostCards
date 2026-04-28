@@ -376,19 +376,19 @@ body.show-guides .guides { display: block; }
       textLength="1000"
       lengthAdjust="spacingAndGlyphs"
     >
-      Clear Blue Smog Test Only
+       {{shop.name}}
     </text>
   </svg>
 </div>
 
 
     <div class="company-address">
-      2850 Crow Canyon Rd<br>
-      San Ramon, CA 94583
+      {{shop.fullstreet}}<br/>
+      {{shop.fullcitystzip}}
     </div>
 
-    <div class="company-web">clearbluesmogcheck.com</div>
-    <div class="company-phone">925-483-6205</div>
+    <div class="company-web">{{shop.website}}</div>
+    <div class="company-phone">{{shop.phone}}</div>
   </div>
 
   <!-- CENTER: VALUE STATEMENT -->
@@ -402,10 +402,10 @@ body.show-guides .guides { display: block; }
   <div class="offer">
     <div class="row">
       <div class="save">Special</div>
-      <div class="amt">$49</div>
+      <div class="amt">{{shop.offeramt}}</div>
     </div>
     <div class="fine">
-      2000 or later passenger vehicles only.
+      {{shop.offerdetails}}
     </div>
   </div>
 

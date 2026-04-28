@@ -435,11 +435,11 @@ body {
         </svg>
 
         <div class="header-text header-left lightbluetext">
-          Clear Blue Smog Test Only
+          {{shop.name}}
         </div>
 
         <div class="header-text header-right lightbluetext">
-          925-483-6205
+          {{shop.phone}}
         </div>
         
         </div>
@@ -451,12 +451,10 @@ body {
         <div class="layer text-mask">
           <div class="text-column">
             <div class="headline">Smog Check Reminder</div>
-            <div class="price">$49.99</div>
+            <div class="price">{{shop.offeramt}}</div>
             <div class="brand-script upslope medium-headline lightbluetext">Special</div>
             <div class="terms">
-              * Price includes certificate. 2000 &amp; later gas light use vehicles only.
-              Extra fees may apply for SUVs and trucks.
-              See shop for details.
+              {{shop.offerdetails}}
             </div>
           </div>
         </div>
@@ -509,17 +507,17 @@ body {
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
           >
-            Clear Blue Smog Test Only
+            {{shop.name}}
           </text>
         </svg>
       </div>
 
         <div class="biz-address">
-          2850 Crow Canyon Rd<br>
-          San Ramon, CA 94583
+          {{shop.fullstreet}}<br>
+          {{shop.fullcitystzip}}
         </div>
-        <div class="biz-phone">(925) 855-8378</div>
-        <div class="biz-web">clearbluesmogcheck.com</div>
+        <div class="biz-phone">{{shop.phone}}</div>
+        <div class="biz-web">{{shop.website}}</div>
       </div>
 
       <div class="red-col hours">
