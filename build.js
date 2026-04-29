@@ -2,10 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 // args
-let [templateArg, dataArg, outputDir] = process.argv.slice(2);
+let [templateArg, dataArg] = process.argv.slice(2);
+let outputDir = 'dist';
 
-if (!templateArg || !dataArg || !outputDir) {
-  console.error('Usage: node build.js <template> <data.json|path> <outputDir>');
+if (!templateArg || !dataArg ) {
+  console.error('Usage: node build.js <template> <data.json|path> ');
   process.exit(1);
 }
 

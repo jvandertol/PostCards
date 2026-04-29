@@ -8,8 +8,7 @@
       "program": "${workspaceFolder}/build.js",
       "args": [
         "${input:templateDir}",
-        "${input:dataFile}",
-        "${input:outputDir}"
+        "${input:dataFile}"
       ],
       "console": "integratedTerminal"
     }
@@ -24,11 +23,6 @@
       "id": "dataFile",
       "type": "promptString",
       "description": "Data JSON path"
-    },
-    {
-      "id": "outputDir",
-      "type": "promptString",
-      "description": "Output folder"
     }
   ]
 }

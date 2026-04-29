@@ -1,0 +1,14 @@
+{
+  "data": {
+    "name": "Joe's Smog Check",
+    "fullstreet": "123 Main St",
+    "fullcitystzip": "San Jose, CA 95123",
+    "website": "www.joessmog.com",
+    "phone": "(408) 555-1234",
+    "offeramt": "$20",
+    "offerdetails": "Valid through June 30. Must present this postcard.",
+    "dmvseal": "dmvseal.png",
+    "smogLogo":"smog-logo.png",
+    "smogHero":"smog-hero.webp"
+  }
+}

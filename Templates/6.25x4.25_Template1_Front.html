@@ -109,7 +109,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("https://oceansidesmogandautorepair.com/images/smog-hero.webp");
+  background-image: url("{{smogHero}}");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left center;
@@ -435,11 +435,11 @@ body {
         </svg>
 
         <div class="header-text header-left lightbluetext">
-          {{shop.name}}
+          {{name}}
         </div>
 
         <div class="header-text header-right lightbluetext">
-          {{shop.phone}}
+          {{phone}}
         </div>
         
         </div>
@@ -451,10 +451,10 @@ body {
         <div class="layer text-mask">
           <div class="text-column">
             <div class="headline">Smog Check Reminder</div>
-            <div class="price">{{shop.offeramt}}</div>
+            <div class="price">{{offeramt}}</div>
             <div class="brand-script upslope medium-headline lightbluetext">Special</div>
             <div class="terms">
-              {{shop.offerdetails}}
+              {{offerdetails}}
             </div>
           </div>
         </div>
@@ -463,13 +463,13 @@ body {
         <div class="layer logo-rail">
           <!-- DMV -->
           <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
-            <image href="dmvseal.png" x="15" y="15" width="70" height="70"
+            <image href="{{dmvseal}}" x="15" y="15" width="70" height="70"
                    preserveAspectRatio="xMidYMid meet"/>
           </svg>
 
           <!-- Smog -->
           <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
-            <image href="smog-logo.png" x="15" y="15" width="70" height="70"
+            <image href="{{smogLogo}}" x="15" y="15" width="70" height="70"
                    preserveAspectRatio="xMidYMid meet"/>
           </svg>
 
@@ -507,17 +507,17 @@ body {
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
           >
-            {{shop.name}}
+            {{name}}
           </text>
         </svg>
       </div>
 
         <div class="biz-address">
-          {{shop.fullstreet}}<br>
-          {{shop.fullcitystzip}}
+          {{fullstreet}}<br>
+          {{fullcitystzip}}
         </div>
-        <div class="biz-phone">{{shop.phone}}</div>
-        <div class="biz-web">{{shop.website}}</div>
+        <div class="biz-phone">{{phone}}</div>
+        <div class="biz-web">{{website}}</div>
       </div>
 
       <div class="red-col hours">
