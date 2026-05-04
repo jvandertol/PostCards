@@ -12,10 +12,10 @@
     --trim-w: 6in;
     --trim-h: 4in;
     --bleed: 0.125in;
-    --safe: 0.25in;
+    --safe: 0.125in;
 
-    --blue: #333366;
-    --orange: #FFAA44;
+    --bkgclr: #b1121b;
+    --hdrtxtclr: #FFF;
   }
 
   /* =========================
@@ -82,6 +82,7 @@
     height: calc(var(--trim-h) + 2 * var(--bleed));
     position: relative;
     background: white;
+    border: 2px dashed rgba(0,128,0,0.5);
   }
 
   .trim {
@@ -90,7 +91,7 @@
     left: var(--bleed);
     width: var(--trim-w);
     height: var(--trim-h);
-    background: var(--blue);
+    background: var(--bkgclr);
     overflow: hidden;
   }
 
@@ -106,12 +107,16 @@
     display: block;
   }
 
-  .guide-bleed {
-    position: absolute;
-    inset: calc(-1 * var(--bleed));
-    border: 2px dashed rgba(0,128,0,0.5);
-    z-index: 3;
-  }
+  /*
+.guide-bleed {
+  position: absolute;
+  top: var(--bleed);
+  left: var(--bleed);
+  right: var(--bleed);
+  bottom: var(--bleed);
+  border: 2px dashed rgba(0,128,0,0.5);
+  z-index: 3;
+}*/
 
   .guide-trim {
     position: absolute;
@@ -142,7 +147,7 @@
     right: calc(var(--safe) + 1.25in);
     font-size: 0.20in;
     font-weight: bold;
-    color: var(--orange);
+    color: var(--hdrtxtclr);
     text-shadow: 0 0 6px rgba(0,0,0,0.4);
   }
 
@@ -216,7 +221,7 @@
 <div class="preview-scale">
   <div class="bleed-page">
 
-    <div class="guide-bleed guides"></div>
+    <!-- <div class="guide-bleed guides"></div> -->
 
     <div class="trim">
       <div class="guide-trim guides"></div>
@@ -224,7 +229,7 @@
 
       <!-- TOP BRAND -->
       <div class="top-branding">
-        Smog Advantage — SmogAdvantage.com
+        Clear Blue Smog Test
       </div>
 
       <!-- LEFT CONTENT -->
