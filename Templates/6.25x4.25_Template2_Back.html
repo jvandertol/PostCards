@@ -189,6 +189,72 @@
     line-height: 1.25;
   }
 
+  /*new css*/
+/* COUPON (top band) */
+.coupon {
+  position: absolute;
+  top: var(--safe);
+  right: var(--safe);
+  width: 2.4in;   /* adjust as needed */
+  height: 0.9in;
+
+  border: 0.04in dashed #fff;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.coupon-main {
+  font-size: 0.45in;
+  font-weight: 800;
+}
+
+.coupon-sub {
+  font-size: 0.14in;
+}
+
+/* LEFT COLUMN */
+.left-column {
+  position: absolute;
+  top: var(--safe); /* below coupon */
+  left: var(--safe);
+  width: 1.6in;
+}
+
+/* SHOP NAME */
+.shop-name {
+  font-size: 0.28in;
+  font-weight: 800;
+  margin-bottom: 0.08in;
+}
+
+/* ADDRESS */
+.shop-address {
+  font-size: 0.14in;
+  margin-bottom: 0.08in;
+}
+
+/* PHONE */
+.shop-phone {
+  font-size: 0.16in;
+  font-weight: 700;
+  margin-bottom: 0.12in;
+}
+
+/* MAP (reuse your existing box) */
+.map-box {
+  width: 1.3in;
+  height: 1.2in;
+  border: 2px solid #fff;
+  overflow: hidden;
+}
+  /*end new css*/
+
   /* ADDRESS BLOCK (UNCHANGED) */
   .address-block {
     position: absolute;
@@ -227,34 +293,33 @@
       <div class="guide-trim guides"></div>
       <div class="guide-safe guides"></div>
 
-      <!-- TOP BRAND -->
-      <div class="top-branding">
-        Clear Blue Smog Test
+      <!-- COUPON -->
+      <div class="coupon">
+        <div class="coupon-main">$20 OFF</div>
+        <div class="coupon-sub">Smog Check – Limited Time</div>
       </div>
 
-      <!-- LEFT CONTENT -->
-      <div class="left-content">
+      <!-- LEFT COLUMN -->
+      <div class="left-column">
 
-        <!-- <div class="qr-placeholder">
-          <img src="https://demandadvantage.com/postcards/2026-qrcode.png"
-               style="width:100%;height:100%;object-fit:contain;">
-        </div> -->
+        <div class="shop-name">
+          Clear Blue Smog Test
+        </div>
 
-      <div class="qr-placeholder">
+        <div class="shop-address">
+          123 Main St<br>
+          San Jose, CA
+        </div>
+
+        <div class="shop-phone">
+          (408) 555-1234
+        </div>
+
+        <div class="map-box">
           <img src="../data/TestOnlySmogII/map.png"
-               style="width:100%;height:100%;object-fit:contain;">
+              style="width:100%;height:100%;object-fit:cover;">
         </div>
 
-        <div class="cta">
-          Scan to learn why you should be our customer<br>
-          <span style="color:red;">Get Your Special Offer</span>
-        </div>
-
-        <ul>
-          <li>Hundreds of Happy Customers</li>
-          <li>Millions of Work Orders</li>
-          <li>Since 2011</li>
-        </ul>
       </div>
 
       <!-- ADDRESS -->
