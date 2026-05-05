@@ -183,7 +183,7 @@
   }
 
   ul {
-    font-size: 0.12in;
+    font-size: 0.15in;
     margin: 0;
     padding-left: 0.18in;
     line-height: 1.25;
@@ -218,19 +218,24 @@
   font-size: 0.14in;
 }
 
-/* LEFT COLUMN */
-.left-column {
+/* SHOP NAME (independent, full width control) */
+.shop-name {
   position: absolute;
-  top: var(--safe); /* below coupon */
+  top: var(--safe);
   left: var(--safe);
-  width: 1.6in;
+  right: calc(var(--safe) + 2.6in); /* leaves room for coupon */
+
+  font-size: 0.25in;
+  font-weight: 800;
+  color: #fff;
 }
 
-/* SHOP NAME */
-.shop-name {
-  font-size: 0.28in;
-  font-weight: 800;
-  margin-bottom: 0.08in;
+/* LEFT COLUMN (now below name) */
+.left-column {
+  position: absolute;
+  top: calc(var(--safe) + 0.45in); /* below shop name */
+  left: var(--safe);
+  width: 1.6in;
 }
 
 /* ADDRESS */
@@ -252,6 +257,11 @@
   height: 1.2in;
   border: 2px solid #fff;
   overflow: hidden;
+}
+
+.marketing {
+  margin-top: 0.10in;
+  padding-left: 0.18in;
 }
   /*end new css*/
 
@@ -298,30 +308,33 @@
         <div class="coupon-main">$20 OFF</div>
         <div class="coupon-sub">Smog Check – Limited Time</div>
       </div>
+<!-- SHOP NAME -->
+<div class="shop-name">
+  Clear Blue Smog Test
+</div>
 
-      <!-- LEFT COLUMN -->
-      <div class="left-column">
+<!-- LEFT COLUMN -->
+<div class="left-column">
 
-        <div class="shop-name">
-          Clear Blue Smog Test
-        </div>
+  <div class="shop-address">
+    123 Main St<br>
+    San Jose, CA
+  </div>
 
-        <div class="shop-address">
-          123 Main St<br>
-          San Jose, CA
-        </div>
+  <div class="shop-phone">
+    (408) 555-1234
+  </div>
 
-        <div class="shop-phone">
-          (408) 555-1234
-        </div>
-
-        <div class="map-box">
-          <img src="../data/TestOnlySmogII/map.png"
-              style="width:100%;height:100%;object-fit:cover;">
-        </div>
-
-      </div>
-
+  <div class="map-box">
+    <img src="../data/TestOnlySmogII/map.png"
+         style="width:100%;height:100%;object-fit:cover;">
+  </div>
+<ul class="marketing">
+  <li>No appointment needed</li>
+  <li>Fast, friendly service</li>
+  <li>Easy, convenient location</li>
+</ul>
+</div>
       <!-- ADDRESS -->
       <div class="address-block"></div>
       <div class="barcode-clear"></div>
