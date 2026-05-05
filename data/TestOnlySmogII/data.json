@@ -1,0 +1,14 @@
+{
+  "data": {
+    "name": "Test Only Smog Station II",
+    "fullstreet": "5200 Telegraph Ave.",
+    "fullcitystzip": "Oakland, CA 94609",
+    "addressmap": "map.png",
+    "website": "",
+    "phone": "(510) 653-8646",
+    "offeramt": "$20",
+    "offerdetails": "20 dollars off our regular smog.",
+    "topLeftPhoto": "white-car-side.jpg",
+    "dmvseal":"smog-logo.png"
+  }
+}

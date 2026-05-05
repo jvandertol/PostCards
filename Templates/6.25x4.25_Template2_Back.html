@@ -225,7 +225,7 @@
   left: var(--safe);
   right: calc(var(--safe) + 2.6in); /* leaves room for coupon */
 
-  font-size: 0.25in;
+  font-size: 0.2in;
   font-weight: 800;
   color: #fff;
 }
@@ -311,28 +311,29 @@
 
       <!-- COUPON -->
       <div class="coupon">
-        <div class="coupon-main">$20 OFF</div>
-        <div class="coupon-sub">Smog Check – Limited Time</div>
+        <div class="coupon-main">{{offeramt}} Off!</div>
+        <div class="coupon-sub">{{offerdetails}}</div>
       </div>
 <!-- SHOP NAME -->
 <div class="shop-name">
-  Clear Blue Smog Test
+  {{name}}
 </div>
 
 <!-- LEFT COLUMN -->
 <div class="left-column">
 
   <div class="shop-address">
-    123 Main St<br>
-    San Jose, CA
+    {{fullstreet}}<br>
+    {{fullcitystzip}}
+    {{website}}
   </div>
 
   <div class="shop-phone">
-    (408) 555-1234
+    {{phone}}
   </div>
 
   <div class="map-box">
-    <img src="../data/TestOnlySmogII/map.png"
+    <img src="{{addressmap}}"
          style="width:100%;height:100%;object-fit:cover;">
   </div>
 <ul class="marketing">

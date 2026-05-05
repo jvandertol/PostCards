@@ -16,9 +16,10 @@ const templateFilePath = (templateArg.includes('/') || templateArg.includes('\\'
   : path.join('./templates', templateArg.endsWith('.html') ? templateArg : `${templateArg}.html`);
 
 // resolve data path
-const dataPath = (dataArg.includes('/') || dataArg.includes('\\'))
+const dataPath = path.isAbsolute(dataArg)
   ? dataArg
   : path.join('./data', dataArg);
+
 
 // validation
 if (!fs.existsSync(templateFilePath)) {
@@ -28,6 +29,8 @@ if (!fs.existsSync(templateFilePath)) {
 if (!fs.existsSync(dataPath)) {
   throw new Error(`Data file not found: ${dataPath}`);
 }
+
+const jobDir = path.dirname(dataPath);
 
 // derive image folder
 const templateFileName = path.basename(templateFilePath, '.html');
@@ -55,9 +58,10 @@ let result = template;
 // image resolver
 function resolveAndCopyImage(fileName) {
   const tryPaths = [
-    path.join(templateImagesDir, fileName),
-    path.join(commonImagesDir, fileName)
-  ];
+  path.join(jobDir, fileName),              // 1. data folder (highest priority)
+  path.join(templateImagesDir, fileName),  // 2. template folder
+  path.join(commonImagesDir, fileName)     // 3. common folder
+];
 
   for (const sourcePath of tryPaths) {
     if (fs.existsSync(sourcePath)) {

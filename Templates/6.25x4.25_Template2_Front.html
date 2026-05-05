@@ -9,8 +9,8 @@
   --trim-w: 6.25in;
   --trim-h: 4.25in;
   --bleed: 0.125in;
-    --red: #b1121b;
-  --black: #111;
+  --red: #b1121b;
+  --bkgrd: #0b2a4a;
   --side-gutter: 0.30in;
 }
 
@@ -140,6 +140,19 @@ body.show-guides .guides { display: block; }
   /* slightly tighter so content stays higher */
   gap: 0.06in;
 }
+.small-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.smog-badge {
+  position: absolute;
+  right: 0.10in;
+  top: -0.15in;     /* shift up */
+  height: 0.495in;  /* 10% larger (0.45 × 1.1) */
+  width: auto;
+  pointer-events: none;
+}
 
 .headline .small {
   font-family: Impact, Arial Black, sans-serif;
@@ -149,7 +162,7 @@ body.show-guides .guides { display: block; }
 
 .headline .bar {
   display: block;
-  background: var(--black);
+  background: var(--bkgrd);
 
   /* escape parent padding */
   margin-left: -0.22in;
@@ -176,7 +189,7 @@ body.show-guides .guides { display: block; }
   top: 1.9in;
   width: 7.20in;
   height: 0.70in;
-  background: var(--black);
+  background: var(--bkgrd);
   transform: rotate(-6deg);
   display: flex;
   align-items: center;
@@ -241,7 +254,7 @@ body.show-guides .guides { display: block; }
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 90px;       /* base size, SVG handles scaling */
-  fill: #111;            /* or var(--black) */
+  fill: #111;            /* or var(--bkgrd) */
   dominant-baseline: alphabetic;
 }
 
@@ -345,16 +358,18 @@ body.show-guides .guides { display: block; }
     <div class="photo"><img class="photo-icon" src="{{topLeftPhoto}}" alt="photo"></div>
 
     <div class="headline">
-      <div class="small">THIS IS YOUR </div>
+      <div class="small-wrapper">
+        <div class="small">THIS IS YOUR</div>
+        <img src="{{dmvseal}}" class="smog-badge" alt="Smog Check">
+      </div>
       <div class="bar">SMOG CHECK</div>
       <div class="headline-bottom">Reminder</div>
-
     </div>
   </div>
 
   <!-- BANNER -->
   <div class="banner">
-    <div class="dont">Don't wait!</div>
+    <div class="dont">Got Smog Check?</div>
     <div class="bring">Come in today!</div>
   </div>
 
